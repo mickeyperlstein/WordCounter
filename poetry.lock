@@ -166,6 +166,14 @@ optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
+name = "pysqlite"
+version = "2.8.3"
+description = "DB-API 2.0 interface for SQLite 3.x"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "pytest"
 version = "6.2.2"
 description = "pytest: simple powerful testing with Python"
@@ -229,7 +237,7 @@ telegram = ["requests"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "59fbd16258495364f77f57da9b530b2d951f08adeba8f4be073d8e49fbef2892"
+content-hash = "6d9a977467e276db82553c4138e942251b850c9d62ed77dbd47deb99249eb5e0"
 
 [metadata.files]
 atomicwrites = [
@@ -297,6 +305,9 @@ pyflakes = [
 pyparsing = [
     {file = "pyparsing-2.4.7-py2.py3-none-any.whl", hash = "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"},
     {file = "pyparsing-2.4.7.tar.gz", hash = "sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1"},
+]
+pysqlite = [
+    {file = "pysqlite-2.8.3.tar.gz", hash = "sha256:17d3335863e8cf8392eea71add33dab3f96d060666fe68ab7382469d307f4490"},
 ]
 pytest = [
     {file = "pytest-6.2.2-py3-none-any.whl", hash = "sha256:b574b57423e818210672e07ca1fa90aaf194a4f63f3ab909a2c67ebb22913839"},
