@@ -46,10 +46,12 @@ def main():
 
     inputs.append((project_name, text_file))
 
+    run_on_file(data_persister, ignorers, project_name, text_file)
+
+
+def run_on_file(data_persister, ignorers, project_name, text_file):
     all_doc = Counter()
-
     counters = list()
-
     with open(text_file) as fp:
         for line in fp:
             if len(line) > 1:
@@ -59,24 +61,19 @@ def main():
 
                 ctr = process_line(line.lower(), ignorers=ignorers)
                 counters.append(ctr)
-
     log.info(f'Reducing {len(counters)} counters ...')
-
     for d in counters:
         all_doc.update(d)
-
     log.info(f'Calculating top_k for {project_name}')
     top_k = all_doc.most_common(n=setting.top_k)
     vals = sorted(all_doc.values())
     median = statistics.median(vals)
     mean = statistics.mean(vals)
-
     log.info(f'{project_name} => MEDIAN: {median}   MEAN: {mean}')
     log.info(f'{project_name} => top_k k={setting.top_k} {top_k}')
-
     log.info('persisting')
-
     data_persister.write(top_k, project_name)
+
 
 if __name__ == '__main__':
     main()
