@@ -1,6 +1,6 @@
 from top_k import setting
-
-from top_k.rewriters.rewriters import *
+from top_k.utils.WordCounter import WordCounter
+from top_k.utils.rewriters import *
 
 logging.basicConfig(level=logging.DEBUG,
                     format='[%(asctime)s] [%(levelname)s] [%(module)s.%(funcName)s] %(message)s',
@@ -10,24 +10,11 @@ logging.basicConfig(level=logging.DEBUG,
 log = logging.getLogger(__name__)
 
 
-class WordCounter(object):
-
-    def __init__(self, rewriters: [Rewriter] = []):
-        self.rewriters = rewriters
-
-    def process(self, line):
-        pass
-
-    def as_dict(self):
-        return {}
-
-
-def process_line(line):
-    # word_counter = WordCounter([ignorer, stop_words, lemmatizer])
-    #
-    # word_counter.process(line)
-    # word_counter.as_dict()
-    pass
+def process_line(line, ignorers) -> dict:
+    word_counter = WordCounter(ignorers)
+    word_counter.process(line)
+    words = word_counter.as_dict()
+    return words
 
 
 def main():
@@ -37,17 +24,20 @@ def main():
     log.warning('warning')
     log.error('error')
 
-    ignorer = LineIgnorer().settings
+    line_ignorer = LineIgnorer()
     stop_words = StopWordsRemover()
     lemmatizer = Lemmatizer()
 
+    ignorers = [line_ignorer, stop_words, lemmatizer]
+    for r in ignorers:  # type [Rewriter]
+        r.load_settings()
 
     text_file = '../texts/alice.txt'
     # text_file = 'top_k.log'
 
     with open(text_file) as fp:
         for line in fp:
-            process_line(line)
+            process_line(line, ignorers=ignorers)
 
 
 if __name__ == '__main__':

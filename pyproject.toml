@@ -9,6 +9,7 @@ python = "^3.8"
 attr = "^0.3.1"
 python-dotenv = "^0.15.0"
 dotdict = "^0.1"
+nltk = "^3.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"

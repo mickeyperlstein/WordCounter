@@ -1,3 +1,5 @@
 .idea
 /texts
 venv
+top_k/top_k.log
+*.log
